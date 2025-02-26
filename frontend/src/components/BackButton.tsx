@@ -1,6 +1,6 @@
 const BackButton = () => {
   return (
-    <div>
+    <div className="backButton">
       <button
         onClick={() =>
           (window.location.href = "http://localhost:5173/recipes/")

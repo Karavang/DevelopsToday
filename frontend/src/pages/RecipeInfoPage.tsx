@@ -28,9 +28,7 @@ const RecipeInfoPage = () => {
     if (recipe && recipe.strCategory) {
       axios
         .get(
-          `http://localhost:4444/recipes?category=${encodeURIComponent(
-            recipe.strCategory,
-          )}`,
+          `http://localhost:4444/recipes?filterType=category&filterValue=${recipe.strCategory}`,
         )
         .then((response) => {
           setRelatedRecipes(response.data.meals);
@@ -56,16 +54,15 @@ const RecipeInfoPage = () => {
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "flex-start" }}>
+    <div className="recipePage">
       <BackButton />
-      <div style={{ flex: 1 }}>
-        <div style={{ display: "flex", alignItems: "center" }}>
+      <div className="recipe">
+        <div>
           <img
             src={recipe.strMealThumb}
             alt={recipe.strMeal}
-            style={{ width: "200px", marginRight: "20px" }}
           />
-          <div style={{ textAlign: "center", flex: 1 }}>
+          <div>
             <h1>{recipe.strMeal}</h1>
             <Link
               to={`/recipes?type=country&filter=${encodeURIComponent(
@@ -76,12 +73,12 @@ const RecipeInfoPage = () => {
             </Link>
           </div>
         </div>
-        <div style={{ textAlign: "center" }}>
+        <div>
           <p>{recipe.strInstructions}</p>
         </div>
-        <div style={{ textAlign: "center" }}>
+        <div>
           <h2>Ingredients</h2>
-          <ul style={{ listStyle: "none", padding: 0 }}>
+          <ul>
             {ingredients.map((item, index) => (
               <li key={index}>
                 <Link
@@ -96,13 +93,7 @@ const RecipeInfoPage = () => {
           </ul>
         </div>
       </div>
-      <aside
-        style={{
-          width: "300px",
-          padding: "0 20px",
-          borderLeft: "1px solid #ccc",
-        }}
-      >
+      <div className="right-list">
         <h2>More in {recipe.strCategory}</h2>
         <ul>
           {relatedRecipes.map((item) => (
@@ -111,7 +102,7 @@ const RecipeInfoPage = () => {
             </li>
           ))}
         </ul>
-      </aside>
+      </div>
     </div>
   );
 };

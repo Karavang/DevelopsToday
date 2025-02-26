@@ -41,10 +41,12 @@ const RecipeListPage = () => {
   }, [filterValue, filterType]);
 
   return (
-    <div>
-      <InputByCountry />
-      <InputByIng />
-      <InputByCategory />
+    <div className="listPage">
+      <div className="inputs">
+        <InputByCountry />
+        <InputByIng />
+        <InputByCategory />
+      </div>
       <h1>
         {filterValue
           ? `Recipes filtered by ${filterType}: ${filterValue}`
